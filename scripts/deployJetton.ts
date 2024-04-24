@@ -1,13 +1,13 @@
 import { toNano } from '@ton/core';
-import { Jetton } from '../wrappers/Jetton';
+import { JettonWallet } from '../wrappers/JettonWallet';
 import { compile, NetworkProvider } from '@ton/blueprint';
 
 export async function run(provider: NetworkProvider) {
-    const jetton = provider.open(Jetton.createFromConfig({}, await compile('Jetton')));
+    const jettonWallet = provider.open(JettonWallet.createFromConfig({}, await compile('JettonWallet')));
 
-    await jetton.sendDeploy(provider.sender(), toNano('0.05'));
+    await jettonWallet.sendDeploy(provider.sender(), toNano('0.05'));
 
-    await provider.waitForDeploy(jetton.address);
+    await provider.waitForDeploy(jettonWallet.address);
 
     // run methods on `jetton`
 }

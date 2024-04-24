@@ -1,6 +1,6 @@
 import { Blockchain, SandboxContract, TreasuryContract } from '@ton/sandbox';
 import { Cell, toNano } from '@ton/core';
-import { Jetton } from '../wrappers/Jetton';
+import { JettonWallet } from '../wrappers/JettonWallet';
 import '@ton/test-utils';
 import { compile } from '@ton/blueprint';
 
@@ -13,12 +13,12 @@ describe('Jetton', () => {
 
     let blockchain: Blockchain;
     let deployer: SandboxContract<TreasuryContract>;
-    let jetton: SandboxContract<Jetton>;
+    let jetton: SandboxContract<JettonWallet>;
 
     beforeEach(async () => {
         blockchain = await Blockchain.create();
 
-        jetton = blockchain.openContract(Jetton.createFromConfig({}, code));
+        jetton = blockchain.openContract(JettonWallet.createFromConfig({}, code));
 
         deployer = await blockchain.treasury('deployer');
 

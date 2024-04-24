@@ -1,0 +1,7 @@
+cell pack_jetton_wallet_data(int balance, slice owner_address, slice jetton_master_address) inline {
+    return  begin_cell()
+        .store_coins(balance)
+        .store_slice(owner_address)
+        .store_slice(jetton_master_address)
+        .end_cell();
+}
